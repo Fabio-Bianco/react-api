@@ -7,7 +7,7 @@ function App() {
     console.log("App caricata!");
 
     // Eseguiamo il fetch verso l'API degli attori
-    fetch('https://jsonplaceholder.typicode.com/users')
+    fetch('https://www.freetestapi.com/api/v1/actresses')
       .then((res) => {
         console.log("Risposta ricevuta! Ora la trasformo in JSON...");
         return res.json(); // trasformiamo la risposta in JSON
