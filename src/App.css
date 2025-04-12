@@ -1,0 +1,16 @@
+/* App.css */
+
+.app-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* o space-around per più aria */
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  
+  .app-title {
+    text-align: center;
+    color: #333;
+  }
+  

@@ -1,0 +1,19 @@
+.actress-card {
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 16px;
+  background-color: #fff;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+
+  /* 👇 le dimensioni più compatte */
+  width: 250px;
+  flex-shrink: 0;
+}
+
+
+.actress-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-top: 10px;
+}
