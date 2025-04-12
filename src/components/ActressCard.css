@@ -1,19 +1,101 @@
-.actress-card {
-  border: 1px solid #ccc;
-  border-radius: 12px;
-  padding: 16px;
-  background-color: #fff;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
-
-  /* 👇 le dimensioni più compatte */
-  width: 250px;
-  flex-shrink: 0;
+/* === PALETTE STILE "ATTORI FAMOSI" === */
+:root {
+  --bg-dark: #1c1c1c;
+  --blue-accent: #007bff;
+  --light-blue: #3399ff;
+  --white: #ffffff;
+  --gray-light: #e0e0e0;
 }
 
+/* === RESET & BASE === */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--white);
+}
+
+h1.app-title {
+  text-align: center;
+  font-size: 2rem;
+  margin: 30px 0 10px 0;
+  font-weight: 600;
+  color: var(--light-blue);
+  text-shadow: 1px 1px 2px black;
+}
+
+/* === CAMPO DI RICERCA CENTRATO === */
+.search-input {
+  display: block;
+  margin: 0 auto 30px auto;
+  padding: 10px;
+  width: 100%;
+  max-width: 320px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-light);
+  background-color: #f9f9f9;
+  color: #333;
+  font-size: 1rem;
+}
+
+/* === CONTAINER CARD === */
+.app-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* === CARD STILIZZATE === */
+.actress-card {
+  border-radius: 12px;
+  padding: 16px;
+  width: 250px;
+  background-color: var(--white);
+  color: #222;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.actress-card:hover {
+  transform: scale(1.03);
+}
 
 .actress-image {
   width: 100%;
   height: auto;
   border-radius: 10px;
   margin-top: 10px;
+}
+
+/* === PULSANTI PAGINAZIONE === */
+.pagination-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.pagination-buttons button {
+  background-color: var(--blue-accent);
+  color: var(--white);
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.pagination-buttons button:hover {
+  background-color: var(--light-blue);
+}
+
+.pagination-buttons span {
+  align-self: center;
+  font-size: 1rem;
 }

@@ -1,14 +1,25 @@
 import { useEffect, useState } from "react";
 import ActressCard from "./components/ActressCard";
-import ActorCard from "./components/ActorCard"; // ti spiego sotto com’è
+import ActorCard from "./components/ActorCard";
 import "./App.css";
 
 function App() {
-  const [page, setPage] = useState(1);
-  const [people, setPeople] = useState([]); // può essere attrici o attori
+  const [page, setPage] = useState(1); // 1 = attrici, 2 = attori
+  const [people, setPeople] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
 
-  // carica in base alla pagina attuale
-  const loadPeople = () => {
+  // 🎯 debounce effetto: attende 300ms dopo stop digitazione
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setDebouncedSearchTerm(searchTerm);
+    }, 300);
+
+    return () => clearTimeout(timeout); // pulizia timeout se si digita ancora
+  }, [searchTerm]);
+
+  // 🎬 carica i dati in base alla pagina
+  const loadPage = () => {
     const url =
       page === 1
         ? "https://www.freetestapi.com/api/v1/actresses"
@@ -25,42 +36,72 @@ function App() {
       .catch((err) => console.error("Errore nel fetch:", err));
   };
 
-  // aggiorna i dati quando cambia pagina
+  // carica ogni volta che cambia pagina
   useEffect(() => {
     console.log("🌀 useEffect attivato - Pagina corrente:", page);
-    loadPeople();
+    loadPage();
   }, [page]);
 
-  // bottoni
+  // ➕ filtra persone in base al nome scritto
+  const filteredPeople = people.filter((person) =>
+    person.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+  );
+
+  // BOTTONI prev / next
   const nextPage = () => {
     console.log("➡️ Funzione nextPage chiamata");
-    setPage((prev) => Math.min(prev + 1, 2)); // limitiamo a max 2 pagine
+    setPage((prev) => Math.min(prev + 1, 2));
   };
 
   const prevPage = () => {
     console.log("⬅️ Funzione prevPage chiamata");
-    setPage((prev) => Math.max(prev - 1, 1)); // min 1
+    setPage((prev) => Math.max(prev - 1, 1));
   };
 
   return (
-  <>
-    <h1 className="app-title">
-    {page === 1 ? " Lista Attrici " : " Lista Attori "}
-  </h1>
+    <>
+      <h1 className="app-title">
+        {page === 1 ? "🌟 Lista Attrici" : "🎭 Lista Attori"}
+      </h1>
 
-    <div className="app-container">
+      <div className="pagination-buttons">
+        <button onClick={prevPage} disabled={page === 1}>
+          ⬅️ Prev
+        </button>
+        <span>Pagina {page}</span>
+        <button onClick={nextPage} disabled={page === 2}>
+          Next ➡️
+        </button>
+      </div>
+      {/* 🔍 Campo ricerca */}
+      <input
+        className="search-input"
+        type="text"
+        placeholder="Cerca per nome..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        
+      />
+      
 
-      {/* Mostra card diverse in base alla pagina */}
-      {people.map((person) =>
-        page === 1 ? (
-          <ActressCard key={person.id} actress={person} />
-        ) : (
-          <ActorCard key={person.id} actor={person} />
-        )
-      )}
-    </div>
-    {/* 🔘 BOTTONI PER CAMBIARE PAGINA */}
-    <div className="pagination-buttons">
+
+      <div className="app-container">
+
+        
+        
+        {/* 🎥 Stampa card filtrate */}
+        {filteredPeople.map((person) =>
+          page === 1 ? (
+            <ActressCard key={person.id} actress={person} />
+          ) : (
+            <ActorCard key={person.id} actor={person} />
+          )
+        )}
+
+      </div>
+
+      {/* 🔘 Bottoni di paginazione */}
+      <div className="pagination-buttons">
         <button onClick={prevPage} disabled={page === 1}>
           ⬅️ Prev
         </button>
@@ -71,7 +112,6 @@ function App() {
       </div>
     </>
   );
-  
 }
 
 export default App;
