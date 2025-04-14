@@ -1,101 +1,163 @@
-/* === PALETTE STILE "ATTORI FAMOSI" === */
 :root {
-  --bg-dark: #1c1c1c;
-  --blue-accent: #007bff;
-  --light-blue: #3399ff;
+  --color-attrici: #e63946; 
+  --color-attori: #457b9d;   
+  --bg-dark: #1e1e2f;
+  --bg-card: #2a2a3d;
+  --accent: #4a90e2;
+  --accent-light: #79b6f2;
+  --text-light: #f0f0f0;
+  --text-soft: #c0c0c0;
   --white: #ffffff;
-  --gray-light: #e0e0e0;
+  --gray-line: #333;
+  --radius: 10px;
+  --shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* === RESET & BASE === */
+/* BASE */
 body {
   margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
   background-color: var(--bg-dark);
-  color: var(--white);
+  color: var(--text-light);
 }
 
-h1.app-title {
-  text-align: center;
+
+/* Titolo base */
+.app-title {
   font-size: 2rem;
-  margin: 30px 0 10px 0;
-  font-weight: 600;
-  color: var(--light-blue);
-  text-shadow: 1px 1px 2px black;
+  text-align: center;
+  margin: 20px 0;
+  transition: color 0.3s ease;
 }
 
-/* === CAMPO DI RICERCA CENTRATO === */
+/* Colore per attrici */
+.attrici-title {
+  color: #ff7fa1; /* rosa acceso */
+}
+
+/* Colore per attori */
+.attori-title {
+  color: #4ecdc4; /* verde acqua */
+}
+
+
+/* SEARCH */
+.search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
 .search-input {
-  display: block;
-  margin: 0 auto 30px auto;
-  padding: 10px;
+  padding: 12px 16px;
   width: 100%;
-  max-width: 320px;
-  border-radius: 8px;
-  border: 1px solid var(--gray-light);
-  background-color: #f9f9f9;
-  color: #333;
+  max-width: 360px;
+  border-radius: var(--radius);
+  border: 1px solid var(--gray-line);
+  background-color: #f5f5f5;
+  color: #222;
   font-size: 1rem;
+  box-shadow: var(--shadow);
 }
 
-/* === CONTAINER CARD === */
+/* CONTAINER CARDS */
 .app-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
-  padding: 20px;
+  gap: 24px;
+  padding: 30px 16px;
 }
 
-/* === CARD STILIZZATE === */
+/* CARD */
 .actress-card {
-  border-radius: 12px;
-  padding: 16px;
-  width: 250px;
-  background-color: var(--white);
-  color: #222;
-  box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
-  transition: transform 0.2s ease;
+  background-color: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 20px;
+  width: 280px;
+  color: var(--text-light);
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .actress-card:hover {
-  transform: scale(1.03);
+  transform: scale(1.015);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
 }
 
 .actress-image {
   width: 100%;
   height: auto;
-  border-radius: 10px;
-  margin-top: 10px;
+  border-radius: 8px;
+  margin-top: 12px;
+  margin-bottom: 16px;
 }
 
-/* === PULSANTI PAGINAZIONE === */
+.actress-card h2 {
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+  color: var(--title-color);
+}
+
+
+.actress-card p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 4px 0;
+  color: var(--text-soft);
+}
+
+.actress-card h4 {
+  margin-top: 12px;
+  font-size: 1rem;
+  color: var(--text-light);
+}
+
+/* UL film/premi */
+.actress-card ul {
+  padding-left: 20px;
+  margin: 8px 0;
+  color: var(--text-light);
+}
+
+/* PAGINATION */
 .pagination-buttons {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-end; 
   gap: 10px;
   padding: 20px;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin: 20px;
 }
 
+
 .pagination-buttons button {
-  background-color: var(--blue-accent);
+  background-color: var(--accent);
   color: var(--white);
+  padding: 6px 12px; /* più compatti */
+  font-size: 0.9rem;
   border: none;
-  padding: 10px 16px;
   border-radius: 6px;
-  font-weight: bold;
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
 
+
 .pagination-buttons button:hover {
-  background-color: var(--light-blue);
+  background-color: var(--accent-light);
 }
 
 .pagination-buttons span {
   align-self: center;
   font-size: 1rem;
+  color: var(--text-soft);
+}
+
+/* RISULTATI */
+.results-found,
+.no-results {
+  text-align: center;
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+  color: var(--text-soft);
 }

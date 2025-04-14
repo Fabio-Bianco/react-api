@@ -1,35 +1,41 @@
 // src/components/ActorCard.jsx
 import React from "react";
-import "./ActressCard.css"; // possiamo riutilizzare lo stesso stile
+import "./ActressCard.css";
 
-export default function ActorCard({ actor }) {
-    return (
+const ActorCard = ({ actor }) => {
+  console.log("🎬 Attore ricevuto:", actor);
 
-        <>
-            <div className="actress-card">
-                <h2>{actor.name}</h2>
-                <p><strong>Anno di nascita:</strong> {actor.birthyear}</p>
-                <p><strong>Nazionalità:</strong> {actor.nationality}</p>
-                <p><strong>Biografia:</strong> {actor.bio}</p>
+  const {
+    name,
+    birth_year,
+    nationality,
+    image,
+    awards,
+    biography,
+    most_famous_movies,
+  } = actor;
 
-                <img
-                    src={actor.image}
-                    alt={actor.name}
-                    className="actress-image"
-                />
+  return (
+    <div className="actress-card">
+      <h2>{name}</h2>
+      <p><strong>Anno di nascita:</strong> {birth_year}</p>
+      <p><strong>Nazionalità:</strong> {nationality}</p>
+      <p><strong>Biografia:</strong> {biography}</p>
+      <img src={image} alt={name} className="actress-image" />
+      <h4>Riconoscimenti:</h4>
+      <p>{awards || "Nessun premio disponibile"}</p>
+      <h4>Film più famosi:</h4>
+      {Array.isArray(most_famous_movies) && most_famous_movies.length > 0 ? (
+        <ul>
+          {most_famous_movies.map((movie, index) => (
+            <li key={index}>{movie}</li>
+          ))}
+        </ul>
+      ) : (
+        <p>Nessun film famoso disponibile</p>
+      )}
+    </div>
+  );
+};
 
-                <h4>🏆 Riconoscimenti:</h4>
-                {Array.isArray(actor.awards) ? (
-                    <ul>
-                        {actor.awards.map((award, index) => (
-                            <li key={index}>{award}</li>
-                        ))}
-                    </ul>
-                ) : (
-                    <p>Nessun premio trovato 🥲</p>
-                )}
-            </div>
-        </>
-    );
-
-}
+export default ActorCard;
