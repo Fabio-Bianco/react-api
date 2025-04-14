@@ -24,7 +24,7 @@ const ActorCard = ({ actor }) => {
       <img src={image} alt={name} className="actress-image" />
       <h4>Riconoscimenti:</h4>
       <p>{awards || "Nessun premio disponibile"}</p>
-      <h4>Film più famosi:</h4>
+      
       {Array.isArray(most_famous_movies) && most_famous_movies.length > 0 ? (
         <ul>
           {most_famous_movies.map((movie, index) => (
